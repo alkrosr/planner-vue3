@@ -1,6 +1,9 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue'
 import { ClockIcon, ListBulletIcon, ChartBarIcon } from '@heroicons/vue/24/outline'
+
+const navItems = ['timeline', 'activities', 'progress']
+
 </script>
 
 <template>
@@ -19,31 +22,15 @@ import { ClockIcon, ListBulletIcon, ChartBarIcon } from '@heroicons/vue/24/outli
 
   <nav class="sticky bottom-0 z-10 bg-white">
     <ul class="flex items-center justify-around border-t">
-      <li class="flex-1">
+      <li v-for="item in navItems" :key="item" class="flex-1">
         <a
-          href="#timeline"
+          :href="`#${item}`"
           class="flex flex-col items-center p-2 text-xs capitalize hover:bg-gray-100"
         >
-          <ClockIcon class="h-6 w-6" />
-          Timeline
-        </a>
-      </li>
-      <li class="flex-1">
-        <a
-          href="#activities"
-          class="flex flex-col items-center p-2 text-xs capitalize hover:bg-gray-100"
-        >
-          <ListBulletIcon class="h-6 w-6" />
-          Activities
-        </a>
-      </li>
-      <li class="flex-1">
-        <a
-          href="#progress"
-          class="flex flex-col items-center p-2 text-xs capitalize hover:bg-gray-100"
-        >
-          <ChartBarIcon class="h-6 w-6" />
-          Progress
+          <ClockIcon v-if="item === 'timeline'" class="h-6 w-6" />
+          <ListBulletIcon v-else-if="item === 'activities'" class="h-6 w-6" />
+          <ChartBarIcon v-else class="h-6 w-6" />
+          {{ item }}
         </a>
       </li>
     </ul>
